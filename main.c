@@ -2,7 +2,7 @@
 #include "employee.h"
 #include "heap.h"
 
-#define MAX_EMPLOYEE 6
+#define MAX_EMPLOYEE 12
 
 int main()
 {
@@ -39,7 +39,9 @@ int main()
 		break; //get out of the other loop
 	}
 	}
+
 	printList(person,numEmployee);
+	printf("Num employee = %d\n", numEmployee);
 	heapify(person,2,numEmployee);
 	printList(person,numEmployee);
 

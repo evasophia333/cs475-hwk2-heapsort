@@ -38,7 +38,8 @@ void heapSort(struct Employee *A, int n)
  */
 void buildHeap(struct Employee *A, int n)
 {
-	for(int i=n/2;i>0; i--){
+	int half = (n/2); //floor
+	for(int i=half;i>0; i--){
 		heapify(A,i,n);
 	}
 	//heapify() every element from A[n/2] to A[0]
@@ -55,31 +56,27 @@ void buildHeap(struct Employee *A, int n)
  */
 void heapify(struct Employee *A, int i, int n)
 {
-	int smaller = 0;
-	//et index of left child of element i
+	int smaller = i;
+	//get index of left child of element i
 	 int leftChild = (2*(i+1)-1);
 	//get index of right child of element i
 	 int rightChild = (2*(i+1));
 	//determine which child has a smaller salary. We'll call the index of this
 	//element: "smaller"
-	if(leftChild<=(n-1)&&rightChild<=(n-1)){ //make sure both children are there
-	if(A[leftChild].salary < A[rightChild].salary){
+	if(leftChild<n&&(A[leftChild].salary < A[i].salary)){
 		smaller = leftChild; 
-	}else{
-		smaller = rightChild;
+		printf("Left smaller\n");
 	}
-	}else if(leftChild<=(n-1)){ //only one child
-		smaller = leftChild;
-	}else if(rightChild<=(n-1)){
+	if(rightChild<n&&(A[rightChild].salary<smaller)){
 		smaller = rightChild;
+		printf("Right smaller\n");
 	}
+	printf("smaller: %d\n", smaller);
 	//recursively check if the salary at A[i] > the salary at A[smaller]. 
 	//If it is, swap the two.Then recursively heapify A[smaller].
-	if(A[i].salary>A[smaller].salary){
-		struct Employee *swap1 = &A[i];
-		struct Employee *swap2= &A[smaller];
-		swap(swap1,swap2);
-		heapify(swap2, smaller, n);
+	if(smaller != i){
+		swap(&A[i],&A[smaller]);
+		heapify(A, smaller, n);
 	}//Continue recursion as long as i is within range AND either right_child and left_child are still within range.
 }
 
@@ -114,6 +111,6 @@ void swap(struct Employee *e1, struct Employee *e2){
  */
 void printList(struct Employee *A, int n){
 	for (int i = 0; i < n; ++i) {
-		printf("[id: %s salary: %d], ", A[i].name, A[i].salary);
+		printf("[id: %s salary: %d], \n", A[i].name, A[i].salary);
 	}
 }
