@@ -2,7 +2,7 @@
 #include "employee.h"
 #include "heap.h"
 
-#define MAX_EMPLOYEE 12
+#define MAX_EMPLOYEE 5
 
 int main()
 {
@@ -17,7 +17,7 @@ int main()
 	printf("Salary: ");
 	scanf("%d", &person[numEmployee].salary);
 	numEmployee++;
-		if(numEmployee<MAX_EMPLOYEE){ //-1 because i starts at 0
+		if(numEmployee<MAX_EMPLOYEE){ 
 		//Keep asking for input otherwise finish
 		printf("Enter another user (y/n)? ");
 		scanf(" %c", &nextRound);
@@ -40,10 +40,7 @@ int main()
 	}
 	}
 
+	heapSort(person,numEmployee);
 	printList(person,numEmployee);
-	printf("Num employee = %d\n", numEmployee);
-	heapify(person,2,numEmployee);
-	printList(person,numEmployee);
-
 	return 0;
 }
